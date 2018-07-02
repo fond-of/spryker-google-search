@@ -2,14 +2,14 @@
 
 namespace FondOfSpryker\Client\GoogleCustomSearch;
 
-use Spryker\Shared\Kernel\Transfer\AbstractTransfer\GoogleCustomSearchRequestTransfer;
+use Generated\Shared\Transfer\GoogleCustomSearchrequestTransfer;
+use Generated\Shared\Transfer\GoogleCustomSearchResponseTransfer;
 use Spryker\Shared\Kernel\Transfer\TransferInterface;
 
 interface GoogleCustomSeachClientInterface
 {
     /**
      * @param GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer
-     * @return TransferInterface
      */
-    public function search(GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer): TransferInterface;
+    public function search(GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer);
 }

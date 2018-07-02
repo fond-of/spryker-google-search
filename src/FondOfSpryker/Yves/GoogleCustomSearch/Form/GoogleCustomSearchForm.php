@@ -12,9 +12,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class GoogleCustomSearchForm extends AbstractType
 {
     const FORM_ID = 'search_mini_form';
-    const FIELD_SEARCH = 'search';
+    const FIELD_SEARCH = 'q';
     const FIELD_SUBMIT = 'submit';
-    const BLOCK_PREFIX = 'googleCustomSearchForm';
+    const BLOCK_PREFIX = false;
 
     /**
      * @return string
@@ -31,6 +31,8 @@ class GoogleCustomSearchForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->setAction('search')
+            ->setMethod('GET')
             ->add(self::FIELD_SEARCH, SearchType::class, [
                 'label' => false,
                 'constraints' => [
@@ -39,12 +41,6 @@ class GoogleCustomSearchForm extends AbstractType
                 'attr' => [
                     'class' => 'input-text required-entry form-control',
                     'placeholder' => 'google_custom_search.search'
-                ]
-            ])
-            ->add(self::FIELD_SUBMIT, SubmitType::class, [
-                'label' => 'google_custom_search.search',
-                'attr' => [
-                    'class' => 'search__form__button'
                 ]
             ]);
     }

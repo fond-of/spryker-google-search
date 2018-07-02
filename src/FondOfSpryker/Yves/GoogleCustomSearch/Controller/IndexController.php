@@ -16,11 +16,12 @@ class IndexController extends AbstractController
 {
     public function indexAction(Request $request): array
     {
+        $response = null;
         $googleCustomSearchForm = $this
             ->getFactory()
             ->getGoogleCustomSearchForm();
 
-        $parentRequest = $this->getApplication()['request_stack']->getParantRequest();
+        $parentRequest = $this->getApplication()['request_stack']->getParentRequest();
 
         if ($parentRequest !== null) {
             $request = $parentRequest;
@@ -31,14 +32,15 @@ class IndexController extends AbstractController
         if ($googleCustomSearchForm->isValid() && $googleCustomSearchForm->isSubmitted()) {
             $transfer = new GoogleCustomSearchRequestTransfer();
             $transfer
-                ->setSearchString($googleCustomSearchForm->get('search')->getData())
+                ->setSearchString($googleCustomSearchForm->get('q')->getData())
                 ->setLocale($this->getLocale());
 
-            $response = $this->getClient()->search($transfer);
+            $response = $this->getClient()->search($transfer, 11, 20);
         }
 
         return [
-
+            'googleCustomSearchForm' => $googleCustomSearchForm->createView(),
+            'response' => $response
         ];
     }
 }

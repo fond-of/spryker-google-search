@@ -4,7 +4,7 @@ namespace FondOfSpryker\Yves\GoogleCustomSearch;
 
 use Spryker\Yves\Kernel\AbstractBundleDependencyProvider;
 
-class GoogleCustomSearchDependecyProvider extends AbstractBundleDependencyProvider
+class GoogleCustomSearchDependencyProvider extends AbstractBundleDependencyProvider
 {
 
 }

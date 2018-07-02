@@ -9,20 +9,28 @@ use FondOfSpryker\Shared\GoogleCustomSearch\GoogleCustomSearchConstants;
 
 class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvider
 {
-    const ROUTE_SEARCH = 'search';
+    const ROUTE_SEARCH = '/search';
+    const ROUTE_SEARCH_NAME = 'search';
 
-    public function defineControllers(Application $app)
+    protected function defineControllers(Application $app): void
+    {
+        $this->addSearchRoute();
+    }
+
+    protected function addSearchRoute(): self
     {
         $allowedLocalesPattern = $this->getAllowedLocalesPattern();
 
         $this->createController(
-            self::ROUTE_SEARCH,
-            self::ROUTE_SEARCH,
+            '/' . self::ROUTE_SEARCH,
+            self::ROUTE_SEARCH_NAME,
             GoogleCustomSearchConstants::BUNDLE,
             'Index',
-            'search'
-        )
-        ->method('GET|POST')
-        ->assert(self::ROUTE_SEARCH, $allowedLocalesPattern . self::ROUTE_SEARCH . '|' . self::ROUTE_SEARCH);
+            'index'
+        );
+        //->method('GET|POST')
+        //->assert(self::ROUTE_SEARCH, $allowedLocalesPattern . self::ROUTE_SEARCH . '|' . self::ROUTE_SEARCH);
+
+        return $this;
     }
 }
