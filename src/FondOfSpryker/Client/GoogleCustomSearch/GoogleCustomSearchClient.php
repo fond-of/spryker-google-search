@@ -2,8 +2,8 @@
 
 namespace FondOfSpryker\Client\GoogleCustomSearch;
 
-use Spryker\Client\Kernel\AbstractClient;
 use Generated\Shared\Transfer\GoogleCustomSearchRequestTransfer;
+use Spryker\Client\Kernel\AbstractClient;
 
 /**
  * Class GoogleCustomSearchClient
@@ -13,13 +13,23 @@ use Generated\Shared\Transfer\GoogleCustomSearchRequestTransfer;
 class GoogleCustomSearchClient extends AbstractClient implements GoogleCustomSeachClientInterface
 {
     /**
-     * @param GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer
+     * @param string $apiKey
+     * @param string $cxKey
+     * @param array $config
+     * @param \Generated\Shared\Transfer\GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer
+     *
+     * @return array|\JMS\Serializer\scalar|mixed|null|object
      */
-    public function search(GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer)
-    {
+    public function search(
+        string $apiKey,
+        string $cxKey,
+        array $config,
+        GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer
+    ) {
+        $result = null;
         $googleCustomSearchClient = $this
             ->getFactory()
-            ->createGoogleCustomSearchApiClient();
+            ->createGoogleCustomSearchApiClient($apiKey, $cxKey, $config);
 
         $result = $googleCustomSearchClient->search($googleCustomSearchRequestTransfer->getSearchString());
 

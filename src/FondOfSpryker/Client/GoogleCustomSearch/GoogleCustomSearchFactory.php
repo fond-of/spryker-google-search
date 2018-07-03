@@ -2,16 +2,20 @@
 
 namespace FondOfSpryker\Client\GoogleCustomSearch;
 
-use Spryker\Client\Kernel\AbstractFactory;
 use FondOfPHP\GoogleCustomSearch\Client as GoogleCustomSearchApiClient;
+use Spryker\Client\Kernel\AbstractFactory;
 
 class GoogleCustomSearchFactory extends AbstractFactory
 {
-    public function createGoogleCustomSearchApiClient()
+    /**
+     * @param string $apiKey
+     * @param string $cxKey
+     * @param array $config
+     *
+     * @return \FondOfPHP\GoogleCustomSearch\Client
+     */
+    public function createGoogleCustomSearchApiClient(string $apiKey, string $cxKey, array $config): GoogleCustomSearchApiClient
     {
-        return new GoogleCustomSearchApiClient(
-            'apiKey',
-            'cx'
-        );
+        return new GoogleCustomSearchApiClient($apiKey, $cxKey, $config);
     }
 }

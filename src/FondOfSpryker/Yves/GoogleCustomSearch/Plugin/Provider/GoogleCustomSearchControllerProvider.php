@@ -2,34 +2,53 @@
 
 namespace FondOfSpryker\Yves\GoogleCustomSearch\Plugin\Provider;
 
-use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvider;
-use Silex\Application;
 use FondOfSpryker\Shared\GoogleCustomSearch\GoogleCustomSearchConstants;
-
+use Silex\Application;
+use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvider;
 
 class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvider
 {
-    const ROUTE_SEARCH = '/search';
-    const ROUTE_SEARCH_NAME = 'search';
-
+    /**
+     * @param \Silex\Application $app
+     *
+     * @return void
+     */
     protected function defineControllers(Application $app): void
     {
-        $this->addSearchRoute();
+        $this
+            ->addFormRoute()
+            ->addResultRoute();
     }
 
-    protected function addSearchRoute(): self
+    /**
+     * @return \FondOfSpryker\Yves\GoogleCustomSearch\Plugin\Provider\GoogleCustomSearchControllerProvider
+     */
+    protected function addFormRoute(): self
     {
-        $allowedLocalesPattern = $this->getAllowedLocalesPattern();
-
         $this->createController(
-            '/' . self::ROUTE_SEARCH,
-            self::ROUTE_SEARCH_NAME,
+            GoogleCustomSearchConstants::ROUTE_FORM_URL,
+            GoogleCustomSearchConstants::ROUTE_FORM_NAME,
             GoogleCustomSearchConstants::BUNDLE,
-            'Index',
-            'index'
+            'Search',
+            'form'
+        )
+        ->method('GET');
+
+        return $this;
+    }
+
+    /**
+     * @return \FondOfSpryker\Yves\GoogleCustomSearch\Plugin\Provider\GoogleCustomSearchControllerProvider
+     */
+    protected function addResultRoute(): self
+    {
+        $this->createController(
+            GoogleCustomSearchConstants::ROUTE_SEARCH_URL,
+            GoogleCustomSearchConstants::ROUTE_SEARCH_NAME,
+            GoogleCustomSearchConstants::BUNDLE,
+            'Search',
+            'result'
         );
-        //->method('GET|POST')
-        //->assert(self::ROUTE_SEARCH, $allowedLocalesPattern . self::ROUTE_SEARCH . '|' . self::ROUTE_SEARCH);
 
         return $this;
     }
