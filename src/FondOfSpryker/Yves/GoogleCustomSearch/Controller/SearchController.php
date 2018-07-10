@@ -43,19 +43,18 @@ class SearchController extends AbstractController
             ->getGoogleCustomSearchForm()
             ->handleRequest($request);
 
-        //if ($googleCustomSearchForm->isValid() && $googleCustomSearchForm->isSubmitted()) {
         if ($googleCustomSearchForm->get('q')->getData()) {
             $config = $this->getFactory()->getConfig();
+
             $transfer = new GoogleCustomSearchRequestTransfer();
             $transfer
                 ->setSearchString($googleCustomSearchForm->get('q')->getData())
                 ->setLocale($this->getLocale());
 
             $searchResults = $this->getClient()->search(
-                $config->getApiKey(),
-                $config->getCxKey(),
-                $config->getClientConfig(),
-                $transfer
+                $config,
+                $transfer,
+                $currentPage
             );
 
             $numberOfPages = ceil($searchResults->getTotalResults() / $config->getItemsPerPage());
@@ -66,7 +65,7 @@ class SearchController extends AbstractController
             'searchString' => $transfer->getSearchString(),
             'itemsPerPage' => $config->getItemsPerPage(),
             'currentPage' => $currentPage,
-            'numberOfPages' => $numberOfPages
+            'numberOfPages' => $numberOfPages,
         ];
     }
 }

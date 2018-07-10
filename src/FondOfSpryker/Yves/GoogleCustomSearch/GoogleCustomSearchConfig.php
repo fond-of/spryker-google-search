@@ -50,7 +50,11 @@ class GoogleCustomSearchConfig extends AbstractBundleConfig
         return $this->get(GoogleCustomSearchConstants::CONFIG_TIMEOUT, GoogleCustomSearchConstants::CONFIG_TIMEOUT_DEFAULT);
     }
 
-    public function getItemsPerPage(): int {
+    /**
+     * @return int
+     */
+    public function getItemsPerPage(): int
+    {
         return $this->get(GoogleCustomSearchConstants::RESULT_ITEMS_PER_PAGE, 10);
     }
 }

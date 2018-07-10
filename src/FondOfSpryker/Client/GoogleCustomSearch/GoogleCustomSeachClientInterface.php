@@ -2,22 +2,21 @@
 
 namespace FondOfSpryker\Client\GoogleCustomSearch;
 
+use FondOfSpryker\Yves\GoogleCustomSearch\GoogleCustomSearchConfig;
 use Generated\Shared\Transfer\GoogleCustomSearchRequestTransfer;
 
 interface GoogleCustomSeachClientInterface
 {
     /**
-     * @param string $apiKey
-     * @param string $cxKey
-     * @param array $config
+     * @param \FondOfSpryker\Yves\GoogleCustomSearch\GoogleCustomSearchConfig $config
      * @param \Generated\Shared\Transfer\GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer
+     * @param int $start
      *
      * @return mixed
      */
     public function search(
-        string $apiKey,
-        string $cxKey,
-        array $config,
-        GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer
+        GoogleCustomSearchConfig $config,
+        GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer,
+        int $start
     );
 }
