@@ -1,1 +1,11 @@
-### FOO BAR ###
+{% if searchResults.items | length > 0 %}
+    <ul>
+        {% for item in searchResults.items %}
+            <li>
+                <a href="{{ item.link }}">{{ item.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    {{ 'no_results' | trans }}
+{% endif %}

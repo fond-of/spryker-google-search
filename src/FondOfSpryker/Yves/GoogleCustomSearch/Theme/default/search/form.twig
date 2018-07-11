@@ -1,0 +1,5 @@
+{{ form_start(googleCustomSearchForm}) }}
+    {{ form_widget(googleCustomSearchForm.q) }}
+
+    <button type="submit" title="{{ 'search' | translate }}" class="btn btn-primary"><span>{{ 'search' | translate }}</span></button>
+{{ form_end(googleCustomSearchForm) }}
