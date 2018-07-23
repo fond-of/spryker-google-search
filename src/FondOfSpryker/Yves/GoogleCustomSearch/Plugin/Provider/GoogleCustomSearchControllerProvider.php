@@ -26,12 +26,14 @@ class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvide
     protected function addFormRoute(): self
     {
         $this->createController(
-            GoogleCustomSearchConstants::ROUTE_FORM_URL,
+            '{form}',
             GoogleCustomSearchConstants::ROUTE_FORM_NAME,
             GoogleCustomSearchConstants::BUNDLE,
             'Search',
             'form'
         )
+        ->assert('form',$this->getAllowedLocalesPattern() . 'form|form')
+        ->value('form','/de/form')
         ->method('GET');
 
         return $this;
@@ -43,20 +45,14 @@ class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvide
     protected function addResultRoute(): self
     {
         $this->createController(
-            GoogleCustomSearchConstants::ROUTE_SEARCH_SLUG,
+            '{search}',
             GoogleCustomSearchConstants::ROUTE_SEARCH_NAME,
             GoogleCustomSearchConstants::BUNDLE,
             'Search',
             'result'
         )
-        ->assert(
-            GoogleCustomSearchConstants::ROUTE_SEARCH_URL_VARIABLE,
-            $this->getAllowedLocalesPattern() . GoogleCustomSearchConstants::ROUTE_SEARCH_URL_VARIABLE . '|' . GoogleCustomSearchConstants::ROUTE_SEARCH_URL_VARIABLE
-        )
-        ->value(
-            GoogleCustomSearchConstants::ROUTE_SEARCH_URL_VARIABLE,
-            '/de/' . GoogleCustomSearchConstants::ROUTE_SEARCH_URL_VARIABLE
-        );
+        ->assert('search', $this->getAllowedLocalesPattern() . 'search|search')
+        ->value('search', '/de/search');
 
         return $this;
     }

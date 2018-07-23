@@ -33,7 +33,7 @@ class GoogleCustomSearchForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->setAction(GoogleCustomSearchConstants::ROUTE_SEARCH_URL_VARIABLE)
+            ->setAction('search')
             ->setMethod('GET')
             ->add(self::FIELD_SEARCH, SearchType::class, [
                 'label' => false,
