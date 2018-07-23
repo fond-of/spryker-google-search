@@ -36,6 +36,8 @@ class SearchController extends AbstractController
     public function resultAction(Request $request): array
     {
         $config = $this->getFactory()->getConfig();
+        $config->setLocale($this->getLocale());
+
         $currentPage = ($request->get('p')) ? $request->get('p') : 1;
         $transfer = new GoogleCustomSearchRequestTransfer();
         $numberOfPages = 0;
