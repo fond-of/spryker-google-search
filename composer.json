@@ -1,6 +1,6 @@
 {
   "name": "fond-of-spryker/google-custom-search",
-  "description": "n/a",
+  "description": "Implements Google Search into the Spryker Suite",
   "license": "MIT",
   "authors": [
     {
