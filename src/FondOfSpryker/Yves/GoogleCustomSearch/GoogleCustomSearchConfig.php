@@ -14,6 +14,8 @@ class GoogleCustomSearchConfig extends AbstractBundleConfig
 
     /**
      * @param string $locale
+     *
+     * @return void
      */
     public function setLocale(string $locale): void
     {
