@@ -10,21 +10,12 @@
   ],
   "minimum-stability": "dev",
   "prefer-stable": true,
-  "repositories": [
-    {
-      "type": "path",
-      "url": "/Users/paf/Projects/fond-of-php/google-custom-search",
-      "options": {
-        "symlink": true
-      }
-    }
-  ],
   "require": {
     "php": ">=7.1",
     "spryker/glossary": "^3.0.0",
     "spryker/kernel": "^3.0.0",
     "spryker/zed-request": "^3.0.0",
-    "fond-of-php/google-custom-search": "*"
+    "fond-of-php/google-custom-search": "^1.0",
   },
   "require-dev": {
     "spryker/code-sniffer": "^0.11",
