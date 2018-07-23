@@ -8,6 +8,29 @@ use Spryker\Yves\Kernel\AbstractBundleConfig;
 class GoogleCustomSearchConfig extends AbstractBundleConfig
 {
     /**
+     * @var string
+     */
+    private $locale = GoogleCustomSearchConstants::CONFIG_DEFAULT_LOCALE;
+
+    /**
+     * @param string $locale
+     *
+     * @return void
+     */
+    public function setLocale(string $locale): void
+    {
+        $this->locale = $locale;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLocale(): string
+    {
+        return $this->locale;
+    }
+
+    /**
      * @return string
      */
     public function getApiKey(): string
@@ -20,7 +43,10 @@ class GoogleCustomSearchConfig extends AbstractBundleConfig
      */
     public function getCxKey(): string
     {
-        return $this->get(GoogleCustomSearchConstants::CX_KEY);
+        return $this->get(
+            GoogleCustomSearchConstants::CX_KEY . '_' . $this->getLocale(),
+            $this->get(GoogleCustomSearchConstants::CX_KEY, 'NO_CX_KEY_FOUND')
+        );
     }
 
     /**
