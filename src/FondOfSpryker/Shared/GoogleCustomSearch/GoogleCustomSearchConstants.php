@@ -6,10 +6,10 @@ interface GoogleCustomSearchConstants
 {
     const BUNDLE = 'GoogleCustomSearch';
 
-    const ROUTE_FORM_URL = DIRECTORY_SEPARATOR . 'form';
+    const ROUTE_FORM_URL = '/de/form';
     const ROUTE_FORM_NAME = 'google-search-form';
 
-    const ROUTE_SEARCH_URL = DIRECTORY_SEPARATOR . 'search';
+    const ROUTE_SEARCH_URL = '/de/search';
     const ROUTE_SEARCH_NAME = 'google-search-results';
 
     const API_KEY = 'GOOGLE_CUSTOM_SEARCH_API_KEY';

@@ -35,18 +35,17 @@ class SearchController extends AbstractController
      */
     public function resultAction(Request $request): array
     {
+        $config = $this->getFactory()->getConfig();
         $currentPage = ($request->get('p')) ? $request->get('p') : 1;
+        $transfer = new GoogleCustomSearchRequestTransfer();
         $numberOfPages = 0;
-        $searchResults = null;
+        $searchResults = [];
         $googleCustomSearchForm = $this
             ->getFactory()
             ->getGoogleCustomSearchForm()
             ->handleRequest($request);
 
         if ($googleCustomSearchForm->get('q')->getData()) {
-            $config = $this->getFactory()->getConfig();
-
-            $transfer = new GoogleCustomSearchRequestTransfer();
             $transfer
                 ->setSearchString($googleCustomSearchForm->get('q')->getData())
                 ->setLocale($this->getLocale());
