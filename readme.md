@@ -22,7 +22,7 @@ $config[GoogleCustomSearchConstants::RESULT_ITEMS_PER_PAGE] = 10;
 
 For more information, see the official documentation at https://developers.google.com/custom-search/json-api/v1/overview
 
-You can add different CX_KEYs for locales bei extending the key with the locale, in example:
+You can add different CX_KEYs for locales by extending the key with the locale, in example:
 
 ```
 $config[GoogleCustomSearchConstants::CX_KEY . '_fr_FR']
