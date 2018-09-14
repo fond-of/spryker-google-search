@@ -45,14 +45,14 @@ class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvide
     protected function addResultRoute(): self
     {
         $this->createController(
-            '{search}',
+            '{psearch}',
             GoogleCustomSearchConstants::ROUTE_SEARCH_NAME,
             GoogleCustomSearchConstants::BUNDLE,
             'Search',
             'result'
         )
-        ->assert('search', $this->getAllowedLocalesPattern() . 'search|search')
-        ->value('search', '/de/search');
+        ->assert('psearch', $this->getAllowedLocalesPattern() . 'psearch|psearch')
+        ->value('search', '/de/psearch');
 
         return $this;
     }
