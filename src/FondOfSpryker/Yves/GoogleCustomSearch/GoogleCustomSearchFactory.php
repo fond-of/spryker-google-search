@@ -5,6 +5,7 @@ namespace FondOfSpryker\Yves\GoogleCustomSearch;
 use FondOfSpryker\Yves\GoogleCustomSearch\Form\GoogleCustomSearchForm;
 use Spryker\Shared\Application\ApplicationConstants;
 use Spryker\Yves\Kernel\AbstractFactory;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 class GoogleCustomSearchFactory extends AbstractFactory
@@ -14,8 +15,7 @@ class GoogleCustomSearchFactory extends AbstractFactory
      */
     public function getGoogleCustomSearchForm(): FormInterface
     {
-        return $this->getProvidedDependency(ApplicationConstants::FORM_FACTORY)
-            ->create($this->createGoogleCustomSearchForm());
+        return $this->getFormFactory()->create($this->createGoogleCustomSearchForm());
     }
 
     /**
@@ -32,5 +32,13 @@ class GoogleCustomSearchFactory extends AbstractFactory
     protected function createGoogleCustomSearchForm(): string
     {
         return GoogleCustomSearchForm::class;
+    }
+
+    /**
+     * @return \Symfony\Component\Form\FormFactoryInterface
+     */
+    protected function getFormFactory(): FormFactoryInterface
+    {
+        return $this->getProvidedDependency(ApplicationConstants::FORM_FACTORY);
     }
 }

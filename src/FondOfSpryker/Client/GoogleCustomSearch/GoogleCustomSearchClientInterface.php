@@ -2,21 +2,21 @@
 
 namespace FondOfSpryker\Client\GoogleCustomSearch;
 
-use FondOfSpryker\Yves\GoogleCustomSearch\GoogleCustomSearchConfig;
+use FondOfPHP\GoogleCustomSearch\Result;
 use Generated\Shared\Transfer\GoogleCustomSearchRequestTransfer;
 
-interface GoogleCustomSeachClientInterface
+interface GoogleCustomSearchClientInterface
 {
     /**
-     * @param \FondOfSpryker\Yves\GoogleCustomSearch\GoogleCustomSearchConfig $config
      * @param \Generated\Shared\Transfer\GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer
      * @param int $start
+     * @param int $itemsPerPage
      *
-     * @return mixed
+     * @return \FondOfPHP\GoogleCustomSearch\Result
      */
     public function search(
-        GoogleCustomSearchConfig $config,
         GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer,
-        int $start
-    );
+        int $start,
+        int $itemsPerPage
+    ): Result;
 }

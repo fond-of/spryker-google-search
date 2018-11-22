@@ -4,27 +4,39 @@ namespace FondOfSpryker\Yves\GoogleCustomSearch\Controller;
 
 use Generated\Shared\Transfer\GoogleCustomSearchRequestTransfer;
 use Spryker\Yves\Kernel\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class IndexController
- * @package FondOfSpryker\Yves\GoogleCustomSearch\Controller
  * @method \FondOfSpryker\Yves\GoogleCustomSearch\GoogleCustomSearchFactory getFactory()
- * @method \FondOfSpryker\Client\GoogleCustomSearch\GoogleCustomSeachClientInterface getClient()
+ * @method \FondOfSpryker\Client\GoogleCustomSearch\GoogleCustomSearchClientInterface getClient()
  */
 class SearchController extends AbstractController
 {
+    /**
+     * @var \Symfony\Component\Form\FormInterface
+     */
+    protected $googleCustomSearchForm;
+
+    /**
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    protected function getGoogleCustomSearchForm(): FormInterface
+    {
+        if ($this->googleCustomSearchForm === null) {
+            $this->googleCustomSearchForm = $this->getFactory()->getGoogleCustomSearchForm();
+        }
+
+        return $this->googleCustomSearchForm;
+    }
+
     /**
      * @return array
      */
     public function formAction(): array
     {
-        $googleCustomSearchForm = $this
-            ->getFactory()
-            ->getGoogleCustomSearchForm();
-
         return [
-            'googleCustomSearchForm' => $googleCustomSearchForm->createView(),
+            'googleCustomSearchForm' => $this->getGoogleCustomSearchForm()->createView(),
         ];
     }
 
@@ -36,33 +48,34 @@ class SearchController extends AbstractController
     public function resultAction(Request $request): array
     {
         $config = $this->getFactory()->getConfig();
-        $config->setLocale($this->getLocale());
-
-        $currentPage = ($request->get('p')) ? $request->get('p') : 1;
+        $currentPage = $request->get('p') ?: 1;
         $transfer = new GoogleCustomSearchRequestTransfer();
         $numberOfPages = 0;
-        $searchResults = [];
-        $googleCustomSearchForm = $this
-            ->getFactory()
+        $items = [];
+        $totalResult = 0;
+
+        $googleCustomSearchForm = $this->getFactory()
             ->getGoogleCustomSearchForm()
             ->handleRequest($request);
 
         if ($googleCustomSearchForm->get('q')->getData()) {
-            $transfer
-                ->setSearchString($googleCustomSearchForm->get('q')->getData())
-                ->setLocale($this->getLocale());
+            $transfer->setSearchString($googleCustomSearchForm->get('q')->getData());
 
-            $searchResults = $this->getClient()->search(
-                $config,
-                $transfer,
-                $currentPage
-            );
+            $start = $currentPage;
 
-            $numberOfPages = ceil($searchResults->getTotalResults() / $config->getItemsPerPage());
+            if ($currentPage > 1) {
+                $start = $currentPage * $config->getItemsPerPage() - $config->getItemsPerPage() + 1;
+            }
+
+            $searchResults = $this->getClient()->search($transfer, $start, $config->getItemsPerPage());
+            $totalResult = $searchResults->getTotalResults() < 100 ? $searchResults->getTotalResults() : 100;
+            $numberOfPages = ceil($totalResult / $config->getItemsPerPage());
+            $items = $searchResults->getItems();
         }
 
         return [
-            'searchResults' => $searchResults,
+            'items' => $items,
+            'totalResult' => $totalResult,
             'searchString' => $transfer->getSearchString(),
             'itemsPerPage' => $config->getItemsPerPage(),
             'currentPage' => $currentPage,

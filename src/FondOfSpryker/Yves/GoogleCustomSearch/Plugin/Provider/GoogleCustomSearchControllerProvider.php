@@ -2,12 +2,14 @@
 
 namespace FondOfSpryker\Yves\GoogleCustomSearch\Plugin\Provider;
 
-use FondOfSpryker\Shared\GoogleCustomSearch\GoogleCustomSearchConstants;
 use Silex\Application;
 use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvider;
 
 class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvider
 {
+    public const ROUTE_GOOGLE_CUSTOM_SEARCH_FORM = 'gcs/form';
+    public const ROUTE_GOOGLE_CUSTOM_SEARCH_RESULT = 'gcs/result';
+
     /**
      * @param \Silex\Application $app
      *
@@ -15,8 +17,7 @@ class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvide
      */
     protected function defineControllers(Application $app): void
     {
-        $this
-            ->addFormRoute()
+        $this->addFormRoute()
             ->addResultRoute();
     }
 
@@ -25,16 +26,10 @@ class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvide
      */
     protected function addFormRoute(): self
     {
-        $this->createController(
-            '{form}',
-            GoogleCustomSearchConstants::ROUTE_FORM_NAME,
-            GoogleCustomSearchConstants::BUNDLE,
-            'Search',
-            'form'
-        )
-        ->assert('form',$this->getAllowedLocalesPattern() . 'form|form')
-        ->value('form','/de/form')
-        ->method('GET');
+        $this->createController('{gcs}/form', static::ROUTE_GOOGLE_CUSTOM_SEARCH_FORM, 'GoogleCustomSearch', 'Search', 'form')
+            ->assert('gcs', $this->getAllowedLocalesPattern() . 'gcs|gcs')
+            ->value('gcs', 'gcs')
+            ->method('GET');
 
         return $this;
     }
@@ -44,15 +39,9 @@ class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvide
      */
     protected function addResultRoute(): self
     {
-        $this->createController(
-            '{psearch}',
-            GoogleCustomSearchConstants::ROUTE_SEARCH_NAME,
-            GoogleCustomSearchConstants::BUNDLE,
-            'Search',
-            'result'
-        )
-        ->assert('psearch', $this->getAllowedLocalesPattern() . 'psearch|psearch')
-        ->value('search', '/de/psearch');
+        $this->createController('{gcs}/result', static::ROUTE_GOOGLE_CUSTOM_SEARCH_RESULT, 'GoogleCustomSearch', 'Search', 'result')
+            ->assert('gcs', $this->getAllowedLocalesPattern() . 'gcs|gcs')
+            ->value('gcs', 'gcs');
 
         return $this;
     }

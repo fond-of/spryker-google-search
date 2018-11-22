@@ -2,46 +2,37 @@
 
 namespace FondOfSpryker\Client\GoogleCustomSearch;
 
-use FondOfSpryker\Yves\GoogleCustomSearch\GoogleCustomSearchConfig;
+use FondOfPHP\GoogleCustomSearch\Result;
 use Generated\Shared\Transfer\GoogleCustomSearchRequestTransfer;
 use Spryker\Client\Kernel\AbstractClient;
 
 /**
  * @method \FondOfSpryker\Client\GoogleCustomSearch\GoogleCustomSearchFactory getFactory()
  */
-class GoogleCustomSearchClient extends AbstractClient implements GoogleCustomSeachClientInterface
+class GoogleCustomSearchClient extends AbstractClient implements GoogleCustomSearchClientInterface
 {
     /**
-     * @param \FondOfSpryker\Yves\GoogleCustomSearch\GoogleCustomSearchConfig $config
+     * @var \FondOfPHP\GoogleCustomSearch\Client
+     */
+    protected $client;
+
+    public function __construct()
+    {
+        $this->client = $this->getFactory()->createGoogleCustomSearchClient();
+    }
+
+    /**
      * @param \Generated\Shared\Transfer\GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer
      * @param int $start
+     * @param int $itemsPerPage
      *
-     * @return array|\JMS\Serializer\scalar|mixed|null|object
+     * @return \FondOfPHP\GoogleCustomSearch\Result
      */
     public function search(
-        GoogleCustomSearchConfig $config,
         GoogleCustomSearchRequestTransfer $googleCustomSearchRequestTransfer,
-        int $start
-    ) {
-        $result = null;
-        $googleCustomSearchClient = $this
-            ->getFactory()
-            ->createGoogleCustomSearchApiClient(
-                $config->getApiKey(),
-                $config->getCxKey(),
-                $config->getClientConfig()
-            );
-
-        if ($start > 1) {
-            $start = $start * $config->getItemsPerPage() - $config->getItemsPerPage() + 1;
-        }
-
-        $result = $googleCustomSearchClient->search(
-            $googleCustomSearchRequestTransfer->getSearchString(),
-            $start,
-            $config->getItemsPerPage()
-        );
-
-        return $result;
+        int $start,
+        int $itemsPerPage
+    ): Result {
+        return $this->client->search($googleCustomSearchRequestTransfer->getSearchString(), $start, $itemsPerPage);
     }
 }

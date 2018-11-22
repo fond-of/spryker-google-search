@@ -5,12 +5,12 @@
 
     <transfer name="GoogleCustomSearchRequest">
         <property name="searchString" type="string"/>
-        <property name="locale" type="string"/>
     </transfer>
+
     <transfer name="GoogleCustomSearchResponse">
         <property name="items" type="GoogleCustomSearchResponseItem[]"/>
-        <property name="locale" type="string"/>
     </transfer>
+
     <transfer name="GoogleCustomSearchResponseItem">
         <property name="title" type="string"/>
         <property name="link" type="string"/>

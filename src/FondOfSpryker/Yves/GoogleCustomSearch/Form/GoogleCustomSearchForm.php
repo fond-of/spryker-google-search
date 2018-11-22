@@ -2,7 +2,6 @@
 
 namespace FondOfSpryker\Yves\GoogleCustomSearch\Form;
 
-use FondOfSpryker\Shared\GoogleCustomSearch\GoogleCustomSearchConstants;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -11,10 +10,10 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class GoogleCustomSearchForm extends AbstractType
 {
-    const FORM_ID = 'search_mini_form';
-    const FIELD_SEARCH = 'q';
-    const FIELD_SUBMIT = 'submit';
-    const BLOCK_PREFIX = false;
+    public const FORM_ID = 'search_mini_form';
+    public const FIELD_SEARCH = 'q';
+    public const FIELD_SUBMIT = 'submit';
+    public const BLOCK_PREFIX = false;
 
     /**
      * @return string
