@@ -22,9 +22,9 @@ class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvide
     }
 
     /**
-     * @return \FondOfSpryker\Yves\GoogleCustomSearch\Plugin\Provider\GoogleCustomSearchControllerProvider
+     * @return $this
      */
-    protected function addFormRoute(): self
+    protected function addFormRoute()
     {
         $this->createController('{gcs}/form', static::ROUTE_GOOGLE_CUSTOM_SEARCH_FORM, 'GoogleCustomSearch', 'Search', 'form')
             ->assert('gcs', $this->getAllowedLocalesPattern() . 'gcs|gcs')
@@ -35,9 +35,9 @@ class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvide
     }
 
     /**
-     * @return \FondOfSpryker\Yves\GoogleCustomSearch\Plugin\Provider\GoogleCustomSearchControllerProvider
+     * @return $this
      */
-    protected function addResultRoute(): self
+    protected function addResultRoute()
     {
         $this->createController('{gcs}/result', static::ROUTE_GOOGLE_CUSTOM_SEARCH_RESULT, 'GoogleCustomSearch', 'Search', 'result')
             ->assert('gcs', $this->getAllowedLocalesPattern() . 'gcs|gcs')

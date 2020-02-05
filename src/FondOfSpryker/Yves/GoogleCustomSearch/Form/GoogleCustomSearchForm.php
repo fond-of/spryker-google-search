@@ -8,6 +8,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * @method \FondOfSpryker\Yves\GoogleCustomSearch\GoogleCustomSearchConfig getConfig()
+ */
 class GoogleCustomSearchForm extends AbstractType
 {
     public const FORM_ID = 'search_mini_form';
