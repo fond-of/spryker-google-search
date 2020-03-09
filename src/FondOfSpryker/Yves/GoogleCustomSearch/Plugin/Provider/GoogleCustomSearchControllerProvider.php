@@ -5,6 +5,11 @@ namespace FondOfSpryker\Yves\GoogleCustomSearch\Plugin\Provider;
 use Silex\Application;
 use SprykerShop\Yves\ShopApplication\Plugin\Provider\AbstractYvesControllerProvider;
 
+/**
+ * Class GoogleCustomSearchControllerProvider
+ * @package FondOfSpryker\Yves\GoogleCustomSearch\Plugin\Provider
+ * @deprecated Use `FondOfSpryker\Yves\GoogleCustomSearch\Plugin\Router\GoogleCustomSearchControllerProviderPlugin` instead.
+ */
 class GoogleCustomSearchControllerProvider extends AbstractYvesControllerProvider
 {
     public const ROUTE_GOOGLE_CUSTOM_SEARCH_FORM = 'gcs/form';

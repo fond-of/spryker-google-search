@@ -30,7 +30,7 @@ $config[GoogleCustomSearchConstants::CX_KEY . '_fr_FR']
 
 Dont forget the underscore between the key and locale!
 
-The default route for search is localed with /de, you change this in the GoogleCustomSearchControllerProvider. If you 
+The default route for search is localed with /de, you change this in the GoogleCustomSearchControllerProvider. If you
 dont need any localized route just remove the language parameter in URL.
 
 ```
@@ -39,23 +39,53 @@ dont need any localized route just remove the language parameter in URL.
     '/de/' . GoogleCustomSearchConstants::ROUTE_SEARCH_URL_VARIABLE
 );
 ```
+Add GoogleCustomSearchWidget::class to ShopApplicationDependencyProvider
+```
+protected function getGlobalWidgets(): array
+    {
+        return [
+            ...
+            GoogleCustomSearchWidget::class,
+        ];
+    }
+```
+Add GoogleCustomSearchControllerProviderPlugin to RouterDependencyProvider
+```
+protected function getRouteProvider(): array
+    {
+        return [
+            ...
+            new GoogleCustomSearchControllerProviderPlugin(),
+        ];
+    }
+```
 
 ### Render the form
 
 To render the search form use the following code. If you want to change the routes, expand the module as you like using the Spryker workflow
 
 ```
-{{ render(path('google-search-form')) }}
+{% widget 'GoogleCustomSearchWidget' only %}{% endwidget %}
 ```
 
 ### Results
 
-The search results are displayed under the URL 
+The search results are displayed under the URL
 
 ```
-/search (route name google-search-results). 
+/search (route name google-search-results).
 ```
 
 If you need a different route, just expand the module how you like
 
 Under /Yves/Theme/default/ search you will find two example templates. Feed free to implement your own.
+
+## Changelog
+
+2.0.0 - added Support for Spryker 202001.0
+```
+use {% widget 'GoogleCustomSearchWidget' only %}{% endwidget %} instead of {{ render(path('gcs/form')) }}
+```
+```
+use new router FondOfSpryker\Yves\GoogleCustomSearch\Plugin\Router\GoogleCustomSearchControllerProviderPlugin instead of FondOfSpryker\Yves\GoogleCustomSearch\Plugin\Provider\GoogleCustomSearchControllerProvider }}
+```
