@@ -19,14 +19,6 @@ class GoogleCustomSearchFactory extends AbstractFactory
     }
 
     /**
-     * @return \FondOfSpryker\Yves\GoogleCustomSearch\GoogleCustomSearchConfig
-     */
-    public function getConfig(): GoogleCustomSearchConfig
-    {
-        return new GoogleCustomSearchConfig();
-    }
-
-    /**
      * @return string
      */
     protected function createGoogleCustomSearchForm(): string

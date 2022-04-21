@@ -1,0 +1,20 @@
+{% extends template('widget') %}
+
+{% define data = {
+    googleCustomSearchForm: _widget.googleCustomSearchForm
+} %}
+
+{% block body %}
+    {{ form_start(data.googleCustomSearchForm, {'action': path('gcs/result'), 'attr': {'id': 'search_mini_form', 'class': 'search__form'} }) }}
+        <div class="input-group">
+            {{ form_widget(data.googleCustomSearchForm.q, {'attr': {'data-error-placement': '.term-validation'}}) }}
+
+            <span class="input-group-btn">
+                <button type="submit" title="{{ 'global.search' | trans }}" class="search__form__button">
+                    <span>{{ 'global.search' | trans }}</span>
+                </button>
+            </span>
+        </div>
+        <div class="term-validation"></div>
+    {{ form_end(data.googleCustomSearchForm) }}
+{% endblock %}

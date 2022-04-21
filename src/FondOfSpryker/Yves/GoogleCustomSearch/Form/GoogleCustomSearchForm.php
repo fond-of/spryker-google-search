@@ -8,11 +8,15 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+/**
+ * @method \FondOfSpryker\Yves\GoogleCustomSearch\GoogleCustomSearchConfig getConfig()
+ */
 class GoogleCustomSearchForm extends AbstractType
 {
     public const FORM_ID = 'search_mini_form';
     public const FIELD_SEARCH = 'q';
     public const FIELD_SUBMIT = 'submit';
+    //SprykerUpgradeToDo Check this cause interface needs string not bool
     public const BLOCK_PREFIX = false;
 
     /**
