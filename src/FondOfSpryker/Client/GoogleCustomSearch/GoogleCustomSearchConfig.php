@@ -37,6 +37,7 @@ class GoogleCustomSearchConfig extends AbstractBundleConfig
         return [
             'base_uri' => $this->getClientConfigUrl(),
             'timeout' => $this->getClientConfigTimeout(),
+            'http_errors' => false,
         ];
     }
 
