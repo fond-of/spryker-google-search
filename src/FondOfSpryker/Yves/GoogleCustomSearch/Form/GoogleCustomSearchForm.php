@@ -16,15 +16,14 @@ class GoogleCustomSearchForm extends AbstractType
     public const FORM_ID = 'search_mini_form';
     public const FIELD_SEARCH = 'q';
     public const FIELD_SUBMIT = 'submit';
-    //SprykerUpgradeToDo Check this cause interface needs string not bool
-    public const BLOCK_PREFIX = false;
+    public const FORM_TYPE_NAME = 'googleCustomSearch';
 
     /**
      * @return string
      */
     public function getBlockPrefix(): string
     {
-        return self::BLOCK_PREFIX;
+        return static::FORM_TYPE_NAME;
     }
 
     /**
