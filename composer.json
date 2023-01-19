@@ -17,7 +17,7 @@
     "fond-of-php/google-custom-search": "^2.1.1"
   },
   "require-dev": {
-		"fond-of-codeception/spryker": "^1.0",
+    "fond-of-codeception/spryker": "^1.0",
     "spryker/code-sniffer": "*",
     "spryker-sdk/phpstan-spryker": "*"
   },
@@ -32,7 +32,7 @@
       "Generated\\": "tests/Generated/"
     }
   },
-	"config": {
+  "config": {
     "sort-packages": true,
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
