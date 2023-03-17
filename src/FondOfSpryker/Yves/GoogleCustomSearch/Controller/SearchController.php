@@ -61,6 +61,8 @@ class SearchController extends AbstractController
         if ($googleCustomSearchForm->get('q')->getData()) {
             $transfer->setSearchString($googleCustomSearchForm->get('q')->getData());
 
+            $transfer->setExcludeTerms($config->getExcludeTerms());
+
             $start = $currentPage;
 
             if ($currentPage > 1) {

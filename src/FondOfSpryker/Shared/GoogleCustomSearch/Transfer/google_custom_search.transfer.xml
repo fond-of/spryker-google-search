@@ -5,6 +5,7 @@
 
     <transfer name="GoogleCustomSearchRequest">
         <property name="searchString" type="string"/>
+        <property name="excludeTerms" type="string" />
     </transfer>
 
     <transfer name="GoogleCustomSearchResponse">

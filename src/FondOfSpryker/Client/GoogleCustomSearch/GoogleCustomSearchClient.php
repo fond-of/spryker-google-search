@@ -33,6 +33,6 @@ class GoogleCustomSearchClient extends AbstractClient implements GoogleCustomSea
         int $start,
         int $itemsPerPage
     ): Result {
-        return $this->client->search($googleCustomSearchRequestTransfer->getSearchString(), $start, $itemsPerPage);
+        return $this->client->search($googleCustomSearchRequestTransfer->getSearchString(), $start, $itemsPerPage, $googleCustomSearchRequestTransfer->getExcludeTerms());
     }
 }

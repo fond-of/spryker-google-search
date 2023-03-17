@@ -12,4 +12,5 @@ interface GoogleCustomSearchConstants
     public const TIMEOUT = 'GOOGLE_CUSTOM_SEARCH_CONFIG_TIMEOUT';
     public const TIMEOUT_DEFAULT = 2.0;
     public const RESULT_ITEMS_PER_PAGE = 'RESULT_ITEMS_PER_PAGE';
+    public const EXCLUDE_TERMS = 'EXCLUDE_TERMS';
 }
