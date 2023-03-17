@@ -14,4 +14,12 @@ class GoogleCustomSearchConfig extends AbstractBundleConfig
     {
         return $this->get(GoogleCustomSearchConstants::RESULT_ITEMS_PER_PAGE, 10);
     }
+
+    /**
+     * @return string
+     */
+    public function getExcludeTerms(): string
+    {
+        return $this->get(GoogleCustomSearchConstants::EXCLUDE_TERMS, '');
+    }
 }
